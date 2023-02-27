@@ -1,0 +1,1 @@
+var inst = instance_create_layer(64, 0, "Instances", oWall);
