@@ -40,3 +40,9 @@ x += vx;
 
 y += vy;
 
+if (keyboard_check_pressed(vk_f5))
+{
+	instance_destroy(global.level.id);
+
+	global.level = instance_create_layer(0, 0, "Instances", oLevel);
+}

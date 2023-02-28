@@ -1,18 +1,20 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oLevel",
+  "name": "oBush_1",
   "eventList": [
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
-    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":1,"isDnD":false,},
   ],
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Level Base",
-    "path": "folders/Objects/Level Base.yy",
+    "name": "Flora",
+    "path": "folders/Objects/Flora.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "oFlora",
+    "path": "objects/oFlora/oFlora.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -28,7 +30,10 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": null,
+  "spriteId": {
+    "name": "sBush_1",
+    "path": "sprites/sBush_1/sBush_1.yy",
+  },
   "spriteMaskId": null,
   "visible": true,
 }

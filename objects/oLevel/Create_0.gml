@@ -14,6 +14,10 @@ rooms = [];
 
 walls = [];
 
+flora = [];
+
+ropes = [];
+
 n_col = 8;
 
 n_row = 4;
@@ -52,18 +56,24 @@ function put_ladder( _x, _y, length ) {
 		var inst = instance_create_layer(_x, _y - i, _layer, type);
 	
 		if (type == oWall) array_push(walls, inst);
+		if (type == oRope) array_push(ropes, inst);
 	}
 	
 	if (type == oRope) && (instance_position(_x, _y - i, oWall) != noone)
-		instance_create_layer(_x, _y - i, "First_layer", oRope);
+	{
+		var inst = instance_create_layer(_x, _y - i, "First_layer", oRope);
+		array_push(ropes, inst);
+	}
 	
 	if (type == oRope) && (instance_position(_x, _y - i, oWall) == noone) && (instance_position(_x, _y - i, oRope) == noone)
 		{
 			var inst = instance_create_layer(_x, _y - i, "Instances", oWall);
 			
-			instance_create_layer(_x, _y - i, "First_layer", oRope);
-			
 			array_push(walls, inst);
+			
+			var inst = instance_create_layer(_x, _y - i, "First_layer", oRope);
+			
+			array_push(ropes, inst);
 		}
 	
 }
@@ -180,16 +190,97 @@ for (var i = 0; i < level_w; i += tile_h)
 			
 			var ladder_x = irandom_range( i, i + platform_length ) div tile_h * tile_h ;
 			
-			instance_create_layer(ladder_x, j, "Instances", oRope);
+			var inst = instance_create_layer(ladder_x, j, "Instances", oRope);
+			
+			array_push(ropes, inst);
 			
 			var offset = 64;
 			
 			while (instance_position(ladder_x, j + offset, oBase_Level_Object) != noone) || ( j + offset < level_h ) 
 			{
-				instance_create_layer(ladder_x, j + offset, "Instances", oRope);
+				var inst = instance_create_layer(ladder_x, j + offset, "Instances", oRope);
+				
+				array_push(ropes, inst);
+				
 				offset += tile_h;
 			}
 		}
+	}
+}
+
+// Flora Placer
+
+function free_space_check(_x, _y, _w, _h, type, below = false) {
+	
+	if (_w == 3) var tree = true; else var tree = false;
+	
+	for ( var i = 0; i < _w; i++ ) 
+	{
+		for ( var j = 0; j < _h; j++ ) 
+		{
+			
+			if (below)
+			{
+				var tile = -tile_h;
+				var calc_j = -j; 
+			}
+			else 
+			{
+				var tile = tile_h;
+				var calc_j = j;
+			}
+			
+			var _x_norm = _x + i * tile_h;
+			
+			var _y_norm = _y - calc_j * tile_h;
+			
+			if  (j == 0) && (instance_position(_x_norm, _y + tile, oWall) == noone)
+				return false;
+			
+			if (instance_position(_x_norm, _y_norm, type) != noone) && (instance_position(_x_norm, _y_norm, oWall) != noone) && (( _x_norm > level_w ) || ( _x_norm < 0 ))&& (( _y_norm > level_h ) || ( _y_norm < 0 ))
+				return false;
+		}
+	}
+	return true;
+}
+
+for ( var i = 0; i < array_length(walls); i++ ) {
+	var wall = walls[i];
+	
+	if (free_space_check( wall.x, wall.y - tile_h, 3, 3, oFlora )) && (random(1) < .015)
+	{
+		var inst = instance_create_layer(wall.x, wall.y - 4 * tile_h, "Instances", oTree);
+		array_push(flora, inst);
+	}
+		
+	if (free_space_check( wall.x, wall.y - tile_h, 2, 1, oFlora )) && (random(1) < .025)
+	{
+		var inst = instance_create_layer(wall.x, wall.y - tile_h, "Instances", oBush_1);
+		array_push(flora, inst);
+	}
+		
+	if (free_space_check( wall.x, wall.y - tile_h, 1, 2, oFlora )) && (random(1) < .025)
+	{
+		var inst = instance_create_layer(wall.x, wall.y - 2 * tile_h, "Instances", oBush_2);
+		array_push(flora, inst);
+	}
+		
+	if (free_space_check( wall.x, wall.y - tile_h, 1, 1, oFlora )) && (random(1) < .75)
+	{
+		var inst = instance_create_layer(wall.x, wall.y - tile_h, "Instances", oGrass);
+		array_push(flora, inst);
+	}
+		
+	if (free_space_check( wall.x, wall.y + tile_h, 2, 1, oFlora, true )) && (random(1) < .085)
+	{
+		var inst = instance_create_layer(wall.x, wall.y + tile_h, "Instances", oVine_1);
+		array_push(flora, inst);
+	}
+	
+	if (free_space_check( wall.x, wall.y + tile_h, 1, 2, oFlora, true )) && (random(1) < .085)
+	{
+		var inst = instance_create_layer(wall.x, wall.y + tile_h, "Instances", oVine_2);
+		array_push(flora, inst);
 	}
 }
 
