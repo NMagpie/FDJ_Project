@@ -1,8 +1,10 @@
 {
   "FolderOrderSettings": [
     {"name":"Animation Curves","order":12,"path":"folders/Animation Curves.yy",},
+    {"name":"Perlin Noise","order":16,"path":"folders/Perlin Noise.yy",},
     {"name":"Extensions","order":14,"path":"folders/Extensions.yy",},
     {"name":"Fonts","order":7,"path":"folders/Fonts.yy",},
+    {"name":"General","order":15,"path":"folders/General.yy",},
     {"name":"Notes","order":13,"path":"folders/Notes.yy",},
     {"name":"Objects","order":9,"path":"folders/Objects.yy",},
     {"name":"Paths","order":4,"path":"folders/Paths.yy",},
@@ -14,11 +16,17 @@
     {"name":"Sprites","order":1,"path":"folders/Sprites.yy",},
     {"name":"Tile Sets","order":2,"path":"folders/Tile Sets.yy",},
     {"name":"Timelines","order":8,"path":"folders/Timelines.yy",},
+    {"name":"Flora","order":6,"path":"folders/Objects/Flora.yy",},
+    {"name":"Level Base","order":7,"path":"folders/Objects/Level Base.yy",},
+    {"name":"Flora","order":5,"path":"folders/Sprites/Flora.yy",},
+    {"name":"Level Base","order":6,"path":"folders/Sprites/Level Base.yy",},
   ],
   "ResourceOrderSettings": [
-    {"name":"oWall","order":1,"path":"objects/oWall/oWall.yy",},
-    {"name":"sTiles","order":3,"path":"sprites/sTiles/sTiles.yy",},
-    {"name":"AutoTile","order":1,"path":"scripts/AutoTile/AutoTile.yy",},
-    {"name":"oLevel","order":2,"path":"objects/oLevel/oLevel.yy",},
+    {"name":"oWall","order":2,"path":"objects/oWall/oWall.yy",},
+    {"name":"utility_scripts","order":1,"path":"scripts/utility_scripts/utility_scripts.yy",},
+    {"name":"oRope","order":1,"path":"objects/oRope/oRope.yy",},
+    {"name":"oBase_Level_Object","order":3,"path":"objects/oBase_Level_Object/oBase_Level_Object.yy",},
+    {"name":"sTiles","order":1,"path":"sprites/sTiles/sTiles.yy",},
+    {"name":"perlin_noise_script_functions","order":1,"path":"scripts/perlin_noise_script_functions/perlin_noise_script_functions.yy",},
   ],
 }

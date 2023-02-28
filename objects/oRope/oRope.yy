@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "oLevel",
+  "name": "oRope",
   "eventList": [
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
   ],
@@ -11,7 +11,10 @@
     "name": "Level Base",
     "path": "folders/Objects/Level Base.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "oBase_Level_Object",
+    "path": "objects/oBase_Level_Object/oBase_Level_Object.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -27,7 +30,10 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": null,
+  "spriteId": {
+    "name": "sRope",
+    "path": "sprites/sRope/sRope.yy",
+  },
   "spriteMaskId": null,
   "visible": true,
 }
