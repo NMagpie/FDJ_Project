@@ -8,10 +8,13 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "Level Base",
+    "path": "folders/Objects/Level Base.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "oBase_Level_Object",
+    "path": "objects/oBase_Level_Object/oBase_Level_Object.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
