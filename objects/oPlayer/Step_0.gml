@@ -9,7 +9,8 @@ var move = key_right - key_left;
 
 vx = move * walkv;
 
-vy += grav;
+if (!ladder)
+	vy += grav;
 
 if (place_meeting( x, y + 1, oWall)) && (key_jump) 
 {
@@ -21,6 +22,8 @@ if ( key_up || key_down )
 	if (place_meeting(x, y + 1, oRope)) ladder = true;
 }
 
+// Ladder Use
+
 if (ladder)
 {
 	vy = 0;
@@ -31,7 +34,9 @@ if (ladder)
 	
 	if (key_down) vy = 7;
 	
-	if !place_meeting(x, y + 1, oRope) ladder = false;
+	if !place_meeting(x, bbox_bottom + 1, oRope) {
+		ladder = false;
+		}
 	
 	if (key_jump) {
 		ladder = false;
@@ -40,6 +45,7 @@ if (ladder)
 }
 
 // Horizontal Collision
+
 
 if (place_meeting(x + vx, y, oWall) && (!ladder)) 
 {
@@ -61,21 +67,56 @@ if (place_meeting( x, y + vy, oWall ) && (!ladder))
 	vy = 0;
 }
 
-/*
-var move = sign(vx);
-repeat(abs(ceil(vx)))
-    {
-    if (place_free(x+move,y))
-        {
-        x += move;
-        }
-    else
-        {
-        vx = 0;
-        break;
-        }
-    }
-	*/
+// Untsuck from Collision
+
+if((!ladder) && place_meeting(x, y, oWall)) {
+	for(var i = 0; i < 1000; ++i) {
+		//Right
+		if(!place_meeting(x + i, y, oWall)) {
+			x += i;
+			break;
+		}
+		//Left
+		if(!place_meeting(x - i, y, oWall)) {
+			x -= i;
+			break;
+		}
+		//Up
+		if(!place_meeting(x, y - i, oWall)) {
+			y -= i;
+			break;
+		}
+		//Down
+		if(!place_meeting(x, y + i, oWall)) {
+			y += i;
+			break;
+		}
+		//Top Right
+		if(!place_meeting(x + i, y - i, oWall)) {
+			x += i;
+			y -= i;
+			break;
+		}
+		//Top Left
+		if(!place_meeting(x - i, y - i, oWall)) {
+			x -= i;
+			y -= i;
+			break;
+		}
+		//Bottom Right
+		if(!place_meeting(x + i, y + i, oWall)) {
+			x += i;
+			y += i;
+			break;
+		}
+		//Bottom Left
+		if(!place_meeting(x - i, y + i, oWall)) {
+			x -= i;
+			y += i;
+			break;
+		}
+	}
+}
 
 x += vx;
 

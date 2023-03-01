@@ -190,15 +190,15 @@ for (var i = 0; i < level_w; i += tile_h)
 			
 			var ladder_x = irandom_range( i, i + platform_length ) div tile_h * tile_h ;
 			
-			var inst = instance_create_layer(ladder_x, j, "Level_Base", oRope);
+			var inst = instance_create_layer(ladder_x, j, "First_layer", oRope);
 			
 			array_push(ropes, inst);
 			
 			var offset = 64;
 			
-			while (instance_position(ladder_x, j + offset, oBase_Level_Object) != noone) || ( j + offset < level_h ) 
+			while (instance_position(ladder_x, j + offset, oBase_Level_Object) != noone) && ( j + offset < level_h ) 
 			{
-				var inst = instance_create_layer(ladder_x, j + offset, "Level_Base", oRope);
+				var inst = instance_create_layer(ladder_x, j + offset, "First_layer", oRope);
 				
 				array_push(ropes, inst);
 				
