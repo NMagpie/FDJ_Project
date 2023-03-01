@@ -29,7 +29,7 @@ room_h = level_h / n_row;
 function put_platform( _x, _y, length) {
 	
 	for (var i = 0; i + tile_h <= length; i += tile_h) {
-			var inst = instance_create_layer(_x + i, _y, "Instances", oWall);
+			var inst = instance_create_layer(_x + i, _y, "Level_Base", oWall);
 	
 			array_push(walls, inst);
 	}
@@ -40,7 +40,7 @@ function put_ladder( _x, _y, length ) {
 	if (length < 4) 
 	{
 		var type = oWall;
-		var _layer = "Instances";
+		var _layer = "Level_Base";
 	}
 	else
 	{
@@ -67,7 +67,7 @@ function put_ladder( _x, _y, length ) {
 	
 	if (type == oRope) && (instance_position(_x, _y - i, oWall) == noone) && (instance_position(_x, _y - i, oRope) == noone)
 		{
-			var inst = instance_create_layer(_x, _y - i, "Instances", oWall);
+			var inst = instance_create_layer(_x, _y - i, "Level_Base", oWall);
 			
 			array_push(walls, inst);
 			
@@ -190,7 +190,7 @@ for (var i = 0; i < level_w; i += tile_h)
 			
 			var ladder_x = irandom_range( i, i + platform_length ) div tile_h * tile_h ;
 			
-			var inst = instance_create_layer(ladder_x, j, "Instances", oRope);
+			var inst = instance_create_layer(ladder_x, j, "Level_Base", oRope);
 			
 			array_push(ropes, inst);
 			
@@ -198,7 +198,7 @@ for (var i = 0; i < level_w; i += tile_h)
 			
 			while (instance_position(ladder_x, j + offset, oBase_Level_Object) != noone) || ( j + offset < level_h ) 
 			{
-				var inst = instance_create_layer(ladder_x, j + offset, "Instances", oRope);
+				var inst = instance_create_layer(ladder_x, j + offset, "Level_Base", oRope);
 				
 				array_push(ropes, inst);
 				
@@ -237,10 +237,16 @@ function free_space_check(_x, _y, _w, _h, type, below = false) {
 			if  (j == 0) && (instance_position(_x_norm, _y + tile, oWall) == noone)
 				return false;
 			
-			if (instance_position(_x_norm, _y_norm, type) != noone) && (instance_position(_x_norm, _y_norm, oWall) != noone) && (( _x_norm > level_w ) || ( _x_norm < 0 ))&& (( _y_norm > level_h ) || ( _y_norm < 0 ))
+			if (instance_position(_x_norm, _y_norm, oWall) != noone) || 
+			(( _x_norm > level_w ) || ( _x_norm < 0 )) && 
+			(( _y_norm > level_h ) || ( _y_norm < 0 ))
 				return false;
 		}
 	}
+	
+	if (instance_position(_x, _y, type) != noone)
+		return false;
+	
 	return true;
 }
 
@@ -249,37 +255,37 @@ for ( var i = 0; i < array_length(walls); i++ ) {
 	
 	if (free_space_check( wall.x, wall.y - tile_h, 3, 3, oFlora )) && (random(1) < .015)
 	{
-		var inst = instance_create_layer(wall.x, wall.y - 4 * tile_h, "Instances", oTree);
+		var inst = instance_create_layer(wall.x, wall.y - 4 * tile_h, "Flora", oTree);
 		array_push(flora, inst);
 	}
 		
 	if (free_space_check( wall.x, wall.y - tile_h, 2, 1, oFlora )) && (random(1) < .025)
 	{
-		var inst = instance_create_layer(wall.x, wall.y - tile_h, "Instances", oBush_1);
+		var inst = instance_create_layer(wall.x, wall.y - tile_h, "Flora", oBush_1);
 		array_push(flora, inst);
 	}
 		
 	if (free_space_check( wall.x, wall.y - tile_h, 1, 2, oFlora )) && (random(1) < .025)
 	{
-		var inst = instance_create_layer(wall.x, wall.y - 2 * tile_h, "Instances", oBush_2);
+		var inst = instance_create_layer(wall.x, wall.y - 2 * tile_h, "Flora", oBush_2);
 		array_push(flora, inst);
 	}
 		
 	if (free_space_check( wall.x, wall.y - tile_h, 1, 1, oFlora )) && (random(1) < .75)
 	{
-		var inst = instance_create_layer(wall.x, wall.y - tile_h, "Instances", oGrass);
+		var inst = instance_create_layer(wall.x, wall.y - tile_h, "Flora", oGrass);
 		array_push(flora, inst);
 	}
 		
 	if (free_space_check( wall.x, wall.y + tile_h, 2, 1, oFlora, true )) && (random(1) < .085)
 	{
-		var inst = instance_create_layer(wall.x, wall.y + tile_h, "Instances", oVine_1);
+		var inst = instance_create_layer(wall.x, wall.y + tile_h, "Flora", oVine_1);
 		array_push(flora, inst);
 	}
 	
 	if (free_space_check( wall.x, wall.y + tile_h, 1, 2, oFlora, true )) && (random(1) < .085)
 	{
-		var inst = instance_create_layer(wall.x, wall.y + tile_h, "Instances", oVine_2);
+		var inst = instance_create_layer(wall.x, wall.y + tile_h, "Flora", oVine_2);
 		array_push(flora, inst);
 	}
 }
@@ -294,7 +300,7 @@ function spawn_player() {
 		
 			if (instance_position(platform.x, platform.y, oWall) != noone) && (instance_position(platform.x, platform.y - tile_h, oWall) == noone)
 			{
-				global.player = instance_create_layer(platform.x, platform.y - tile_h, "Instances", oPlayer);
+				global.player = instance_create_layer(platform.x, platform.y - tile_h, "Player", oPlayer);
 				break;
 			}
 	}
