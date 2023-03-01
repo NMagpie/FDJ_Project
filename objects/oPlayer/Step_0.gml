@@ -128,3 +128,5 @@ if (keyboard_check_pressed(vk_f5))
 
 	global.level = instance_create_layer(0, 0, "Level_Base", oLevel);
 }
+
+// Animation
