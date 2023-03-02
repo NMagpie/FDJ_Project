@@ -1,8 +1,10 @@
  //Update Destination
 
 if (instance_exists(follow)){
-	xTo = follow.x;
-	yTo = follow.y;
+	if (follow.x > 0) && (follow.x < room_width)
+		xTo = follow.x;
+	if (follow.y > 0) && (follow.y < room_height)
+		yTo = follow.y;
 }
 
 // Update object position

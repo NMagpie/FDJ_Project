@@ -3,6 +3,8 @@ key_right = keyboard_check(ord("D"));
 key_up = keyboard_check(ord("W"));
 key_down = keyboard_check(ord("S"));
 
+key_shift = keyboard_check(vk_shift);
+
 key_jump = keyboard_check_pressed(vk_space);
 
 var move = key_right - key_left;
@@ -25,7 +27,7 @@ if (key_down || key_up) && place_meeting(x, y, oRope)
 
 // Ladder Use
 
-if (ladder)
+if ladder
 {
 	vy = 0;
 	
@@ -44,6 +46,24 @@ if (ladder)
 		vy += -16;
 	}
 }
+
+// Dash mechanics
+	
+if key_shift && strafe_cooldown_timer == 0
+{
+	strafe_cooldown_timer = strafe_cooldown;
+	strafe_timer = strafe_duration;
+}
+
+if strafe_timer > 0 
+{
+	var look_vector = map_value(look_direction, 0, 1, -1, 1);
+	vx += 10 * look_vector * (strafe_timer * .05 );
+		
+	strafe_timer--;
+}
+
+if strafe_cooldown_timer > 0 strafe_cooldown_timer--;
 
 // Horizontal Collision
 
@@ -120,7 +140,7 @@ if((!ladder) && place_meeting(x, y, oWall)) {
 }
 
 if (vx != 0)
-	look_direction = (vx > 0);
+	look_direction = (move > 0);
 
 x += vx;
 
