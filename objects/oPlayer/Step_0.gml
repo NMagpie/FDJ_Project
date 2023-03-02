@@ -12,15 +12,16 @@ vx = move * walkv;
 if (!ladder)
 	vy += grav;
 
-if (place_meeting( x, y + 1, oWall)) && (key_jump) 
+if place_meeting( x, y + 1, oWall) && key_jump
 {
 	vy += -16;
 }
 
-if ( key_up || key_down )
-{
-	if (place_meeting(x, y + 1, oRope)) ladder = true;
-}
+if key_down && place_meeting(x, y + 1, oRope)
+	ladder = true;
+
+if (key_down || key_up) && place_meeting(x, y, oRope)
+	ladder = true;
 
 // Ladder Use
 
@@ -34,14 +35,14 @@ if (ladder)
 	
 	if (key_down) vy = 7;
 	
-	if !place_meeting(x, bbox_bottom + 1, oRope) {
+	if !place_meeting(x, bbox_bottom + 1, oRope)
 		ladder = false;
-		}
 	
-	if (key_jump) {
+	if (key_jump) 
+	{
 		ladder = false;
 		vy += -16;
-		}
+	}
 }
 
 // Horizontal Collision
@@ -117,6 +118,9 @@ if((!ladder) && place_meeting(x, y, oWall)) {
 		}
 	}
 }
+
+if (vx != 0)
+	look_direction = (vx > 0);
 
 x += vx;
 

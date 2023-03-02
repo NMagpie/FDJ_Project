@@ -4,9 +4,9 @@ custom_randomize();
 
 global.level = self;
 
-level_w = 4096;
+level_w = room_width;
 
-level_h = 1536;
+level_h = room_height;
 
 tile_h = 64;
 
@@ -18,9 +18,9 @@ flora = [];
 
 ropes = [];
 
-n_col = 8;
+n_col = level_w / 512;//8;
 
-n_row = 4;
+n_row = level_h / 384;//4;
 
 room_w = level_w / n_col;
 
