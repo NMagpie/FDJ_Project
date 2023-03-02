@@ -9,3 +9,5 @@ flash = 0;
 
 isHurt = false;
 hitform = 0;
+
+target = oPlayer;
