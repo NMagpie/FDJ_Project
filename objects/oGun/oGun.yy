@@ -29,8 +29,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "sGun_1",
-    "path": "sprites/sGun_1/sGun_1.yy",
+    "name": "sGun",
+    "path": "sprites/sGun/sGun.yy",
   },
   "spriteMaskId": null,
   "visible": true,

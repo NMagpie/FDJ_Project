@@ -29,8 +29,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "sCoin_1",
-    "path": "sprites/sCoin_1/sCoin_1.yy",
+    "name": "sCoin",
+    "path": "sprites/sCoin/sCoin.yy",
   },
   "spriteMaskId": null,
   "visible": true,

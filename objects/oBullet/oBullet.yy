@@ -31,8 +31,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "sBullet_1",
-    "path": "sprites/sBullet_1/sBullet_1.yy",
+    "name": "sBullet",
+    "path": "sprites/sBullet/sBullet.yy",
   },
   "spriteMaskId": null,
   "visible": true,

@@ -6,6 +6,7 @@ if (hp <= 0){
 		image_xscale = sign(vx);
 		if (sign(vx) != 0) image_xscale = sign(vx);
 		instance_create_layer(x, y, "Coins", oCoin);
+		global.enemies--;
 	}
 	
 	instance_destroy();

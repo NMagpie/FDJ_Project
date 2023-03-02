@@ -61,7 +61,11 @@
     ],
     "visibleRange": null,
     "volume": 1.0,
+<<<<<<< HEAD
     "xorigin": 71,
+=======
+    "xorigin": 66,
+>>>>>>> 0197293 (add random spawn chests, random spawn enemies, item mechanincs)
     "yorigin": 34,
   },
   "swatchColours": null,

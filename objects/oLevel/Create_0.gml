@@ -3,6 +3,9 @@ randomize();
 custom_randomize();
 
 global.level = self;
+global.enemies = 0;
+global.money = 0;
+global.chests = irandom(5);
 
 level_w = room_width;
 
@@ -341,6 +344,25 @@ function spawn_player() {
 }
 
 spawn_player();
+
+
+function spawn_chests() {
+
+	while (global.chests > 0) 
+	{
+			var platform = walls[irandom(array_length(walls) - 1)];
+		
+			if (instance_position(platform.x, platform.y, oWall) != noone) && (instance_position(platform.x, platform.y - tile_h, oWall) == noone)
+			{
+				instance_create_layer(platform.x, platform.y - tile_h, "Chests", oChest);
+				global.chests--;
+			}
+	}
+
+}
+
+spawn_chests();
+
 
 // Auto Tiling
 
