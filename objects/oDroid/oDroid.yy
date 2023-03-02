@@ -18,8 +18,6 @@
     "name": "parEnemy",
     "path": "objects/parEnemy/parEnemy.yy",
   },
-  "persistent": false,
-  "parentObjectId": null,
   "persistent": true,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,

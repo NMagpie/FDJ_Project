@@ -14,7 +14,10 @@
     "name": "Enemies",
     "path": "folders/Objects/Entities/Enemies.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "parEnemy",
+    "path": "objects/parEnemy/parEnemy.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
