@@ -67,7 +67,6 @@ if strafe_cooldown_timer > 0 strafe_cooldown_timer--;
 
 // Horizontal Collision
 
-
 if (place_meeting(x + vx, y, oWall) && (!ladder)) 
 {
 	while ((!place_meeting(x + sign(vx), y, oWall))) 

@@ -18,6 +18,12 @@ flora = [];
 
 ropes = [];
 
+enemies = [];
+
+#macro enemy_spawn_delay 5 * 60;
+
+alarm[0] = enemy_spawn_delay;
+
 n_col = level_w / 512;//8;
 
 n_row = level_h / 384;//4;
@@ -288,6 +294,33 @@ for ( var i = 0; i < array_length(walls); i++ ) {
 		var inst = instance_create_layer(wall.x, wall.y + tile_h, "Flora", oVine_2);
 		array_push(flora, inst);
 	}
+}
+
+// Enemy Spawner
+
+function spawn_enemy() {
+	
+	max_x = (oPlayer.x + level_w / 8) div tile_h * tile_h;
+	min_x = (oPlayer.x - level_w / 8) div tile_h * tile_h;
+	
+	min_y = (oPlayer.y + level_h / 8) div tile_h * tile_h;
+	max_y = (oPlayer.y - level_h / 8) div tile_h * tile_h;
+	
+	for ( var i = min_x; i < max_x; i+=64 )
+	{
+		for ( var j = min_y; j > max_y; j-=64 ) 
+		{
+			
+			if (random(1) > 0.9) && (instance_position(i, j, oWall) != noone) && (instance_position(i, j - tile_h, oWall) == noone)
+			{
+				var inst = instance_create_layer(i, j - tile_h + 1, "Enemies", oDroid);
+				array_push(enemies, inst);
+				
+				return;
+			}
+		}
+	}
+
 }
 
 // Player Spawner
