@@ -3,28 +3,45 @@ key_right = keyboard_check(ord("D"));
 key_up = keyboard_check(ord("W"));
 key_down = keyboard_check(ord("S"));
 
+key_shift = keyboard_check(vk_shift);
+
 key_jump = keyboard_check_pressed(vk_space);
 
 var move = key_right - key_left;
 
 vx = move * walkv;
 
+if death_counter == -1
+	if (!isHurt and flash == 0) {
+		image_speed = 1;
+	} else {
+		sprite_index = sDamage;
+		image_speed = 1;
+	}
+
+// Invinvibility Timer
+
+if ( damage_cooldown > 0 ) damage_cooldown--;
+
+if (damage_cooldown == 0) invisible = false;
+
 if (!ladder)
 	vy += grav;
 
-if (place_meeting( x, y + 1, oWall)) && (key_jump) 
+if place_meeting( x, y + 1, oWall) && key_jump
 {
 	vy += -16;
 }
 
-if ( key_up || key_down )
-{
-	if (place_meeting(x, y + 1, oRope)) ladder = true;
-}
+if key_down && place_meeting(x, y + 1, oRope)
+	ladder = true;
+
+if (key_down || key_up) && place_meeting(x, y, oRope)
+	ladder = true;
 
 // Ladder Use
 
-if (ladder)
+if ladder
 {
 	vy = 0;
 	
@@ -34,18 +51,35 @@ if (ladder)
 	
 	if (key_down) vy = 7;
 	
-	if !place_meeting(x, bbox_bottom + 1, oRope) {
+	if !place_meeting(x, bbox_bottom + 1, oRope)
 		ladder = false;
-		}
 	
-	if (key_jump) {
+	if (key_jump) 
+	{
 		ladder = false;
 		vy += -16;
-		}
+	}
 }
 
-// Horizontal Collision
+// Dash mechanics
+	
+if key_shift && strafe_cooldown_timer == 0
+{
+	strafe_cooldown_timer = strafe_cooldown;
+	strafe_timer = strafe_duration;
+}
 
+if strafe_timer > 0 
+{
+	var look_vector = map_value(look_direction, 0, 1, -1, 1);
+	vx += 10 * look_vector * (strafe_timer * .05 );
+		
+	strafe_timer--;
+}
+
+if strafe_cooldown_timer > 0 strafe_cooldown_timer--;
+
+// Horizontal Collision
 
 if (place_meeting(x + vx, y, oWall) && (!ladder)) 
 {
@@ -118,13 +152,31 @@ if((!ladder) && place_meeting(x, y, oWall)) {
 	}
 }
 
+if (vx != 0)
+	look_direction = (move > 0);
+	
+if hp < 1
+{
+	instance_destroy(_gun);
+	vx = 0;
+	vy = 0;
+}
+
 x += vx;
 
 y += vy;
 
-if (keyboard_check_pressed(vk_f5))
-{
-	instance_destroy(global.level.id);
+global._score = _score;
 
-	global.level = instance_create_layer(0, 0, "Level_Base", oLevel);
-}
+// Animation
+
+if (!isHurt) && death_counter == -1
+	if (place_meeting(x, y + 1, oWall)) {	
+		if (vx == 0) {
+			sprite_index = sIdle;
+			image_speed = 1;
+		} else {
+			sprite_index = sWalk;
+			image_speed = 1;
+		}
+	}

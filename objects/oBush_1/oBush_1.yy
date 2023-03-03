@@ -30,10 +30,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "sBush_1",
-    "path": "sprites/sBush_1/sBush_1.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

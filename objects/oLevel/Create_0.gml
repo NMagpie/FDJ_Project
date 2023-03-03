@@ -1,12 +1,17 @@
 randomize();
 
 custom_randomize();
+if !audio_is_playing(theme)
+	audio_play_sound(theme, 1, true);
 
 global.level = self;
+global.enemies = 0;
+global.money = 0;
+global.chests = irandom(20);
 
-level_w = 4096;
+level_w = room_width;
 
-level_h = 1536;
+level_h = room_height;
 
 tile_h = 64;
 
@@ -18,9 +23,17 @@ flora = [];
 
 ropes = [];
 
-n_col = 8;
+enemies = [];
 
-n_row = 4;
+chests = [];
+
+#macro enemy_spawn_delay 5 * 60;
+
+alarm[0] = enemy_spawn_delay;
+
+n_col = level_w / 512;//8;
+
+n_row = level_h / 384;//4;
 
 room_w = level_w / n_col;
 
@@ -290,6 +303,33 @@ for ( var i = 0; i < array_length(walls); i++ ) {
 	}
 }
 
+// Enemy Spawner
+
+function spawn_enemy() {
+	
+	max_x = (oPlayer.x + level_w / 8) div tile_h * tile_h;
+	min_x = (oPlayer.x - level_w / 8) div tile_h * tile_h;
+	
+	min_y = (oPlayer.y + level_h / 8) div tile_h * tile_h;
+	max_y = (oPlayer.y - level_h / 8) div tile_h * tile_h;
+	
+	for ( var i = min_x; i < max_x; i+=64 )
+	{
+		for ( var j = min_y; j > max_y; j-=64 ) 
+		{
+			
+			if (random(1) > 0.9) && (instance_position(i, j, oWall) != noone) && (instance_position(i, j - tile_h, oWall) == noone)
+			{
+				var inst = instance_create_layer(i, j - tile_h + 1, "Enemies", oDroid);
+				array_push(enemies, inst);
+				
+				return;
+			}
+		}
+	}
+
+}
+
 // Player Spawner
 
 function spawn_player() {
@@ -308,6 +348,28 @@ function spawn_player() {
 }
 
 spawn_player();
+
+
+function spawn_chests() {
+
+	while (global.chests > 0) 
+	{
+			var platform = walls[irandom(array_length(walls) - 1)];
+		
+			if (instance_position(platform.x, platform.y, oWall) != noone) && (instance_position(platform.x, platform.y - tile_h, oWall) == noone)
+			{
+				var inst = instance_create_layer(platform.x, platform.y - tile_h, "Chests", oChest);
+				
+				array_push(chests, inst);
+				
+				global.chests--;
+			}
+	}
+
+}
+
+spawn_chests();
+
 
 // Auto Tiling
 
