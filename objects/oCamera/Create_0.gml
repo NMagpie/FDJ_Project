@@ -1,4 +1,5 @@
 cam = view_camera[0];
+
 follow = oPlayer;
 
 view_w = camera_get_view_width(cam) * 1.5;

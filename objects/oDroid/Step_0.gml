@@ -14,7 +14,8 @@ if facing == 1
 else
 	var x_bbox = bbox_left;
 	
-vx = ( sign( target.x - x ) ) * walkv;
+if instance_exists(target)
+	vx = ( sign( target.x - x ) ) * walkv;
 	
 var can_walk = place_meeting(x_bbox + vx, bbox_bottom + 1, oWall);
 
@@ -32,7 +33,7 @@ if !can_walk
 if !can_fall && !can_walk
 	vx = 0;
 
-if can_fall && sign( target.y - y ) < 0
+if (instance_exists(target)) && can_fall && sign( target.y - y ) < 0
 	vx = 0;
 		
 

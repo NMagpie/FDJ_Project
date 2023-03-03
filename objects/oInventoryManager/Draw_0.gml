@@ -1,6 +1,6 @@
-for (var i = 0; i < array_length(inv); i++){
+for (var i = 0; i < array_length(inv); i++) {
 	var _xx = x;
-	var _yy = y+500;
+	var _yy = y+700;
 	var _sep = 60;
 	var _col = c_white;
 	

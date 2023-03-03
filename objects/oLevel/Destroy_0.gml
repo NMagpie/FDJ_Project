@@ -6,5 +6,8 @@ for (var i = 0; i < array_length(ropes); i++)
 
 for (var i = 0; i < array_length(flora); i++)
 	instance_destroy(flora[i]);
+	
+for (var i = 0; i < array_length(chests); i++)
+	instance_destroy(chests[i]);
 
 instance_destroy(global.player);

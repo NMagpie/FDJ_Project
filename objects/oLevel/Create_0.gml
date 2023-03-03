@@ -1,11 +1,13 @@
 randomize();
 
 custom_randomize();
+if !audio_is_playing(theme)
+	audio_play_sound(theme, 1, true);
 
 global.level = self;
 global.enemies = 0;
 global.money = 0;
-global.chests = irandom(5);
+global.chests = irandom(20);
 
 level_w = room_width;
 
@@ -22,6 +24,8 @@ flora = [];
 ropes = [];
 
 enemies = [];
+
+chests = [];
 
 #macro enemy_spawn_delay 5 * 60;
 
@@ -354,7 +358,10 @@ function spawn_chests() {
 		
 			if (instance_position(platform.x, platform.y, oWall) != noone) && (instance_position(platform.x, platform.y - tile_h, oWall) == noone)
 			{
-				instance_create_layer(platform.x, platform.y - tile_h, "Chests", oChest);
+				var inst = instance_create_layer(platform.x, platform.y - tile_h, "Chests", oChest);
+				
+				array_push(chests, inst);
+				
 				global.chests--;
 			}
 	}

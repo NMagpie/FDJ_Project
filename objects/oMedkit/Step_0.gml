@@ -37,5 +37,9 @@ if (vx != 0) image_xscale = sign(vx);
 
 if place_meeting(x, y, oPlayer){
 	item_add(item);
+	
+	if (global.player.hp < 100)
+		global.player.hp += 10;
+	
 	instance_destroy();
 }

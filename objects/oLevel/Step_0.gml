@@ -8,3 +8,10 @@ if (global.enemies < 10)
 		global.enemies++;
 	}
 }
+
+if (keyboard_check_pressed(vk_f5))
+{
+	instance_destroy(global.level.id);
+
+	global.level = instance_create_layer(0, 0, "Level_Base", oLevel);
+}

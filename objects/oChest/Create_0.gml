@@ -5,7 +5,7 @@ collidePlayer = false;
 xDifference = x - camera_get_view_x(view_camera[0])
 yDifference = y - camera_get_view_y(view_camera[0])
 
-objectSprite = 0;
+objectInstance = noone;
 payOnce = true;
 
 text_x = x;
@@ -18,6 +18,6 @@ draw_set_font(fChest);
 
 chest_bought = false;
 
-if (chest_bought){
+if (chest_bought) {
 	image_index = 1;
 }

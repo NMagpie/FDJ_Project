@@ -11,6 +11,20 @@ var move = key_right - key_left;
 
 vx = move * walkv;
 
+if death_counter == -1
+	if (!isHurt and flash == 0) {
+		image_speed = 1;
+	} else {
+		sprite_index = sDamage;
+		image_speed = 1;
+	}
+
+// Invinvibility Timer
+
+if ( damage_cooldown > 0 ) damage_cooldown--;
+
+if (damage_cooldown == 0) invisible = false;
+
 if (!ladder)
 	vy += grav;
 
@@ -140,16 +154,29 @@ if((!ladder) && place_meeting(x, y, oWall)) {
 
 if (vx != 0)
 	look_direction = (move > 0);
+	
+if hp < 1
+{
+	instance_destroy(_gun);
+	vx = 0;
+	vy = 0;
+}
 
 x += vx;
 
 y += vy;
 
-if (keyboard_check_pressed(vk_f5))
-{
-	instance_destroy(global.level.id);
-
-	global.level = instance_create_layer(0, 0, "Level_Base", oLevel);
-}
+global._score = _score;
 
 // Animation
+
+if (!isHurt) && death_counter == -1
+	if (place_meeting(x, y + 1, oWall)) {	
+		if (vx == 0) {
+			sprite_index = sIdle;
+			image_speed = 1;
+		} else {
+			sprite_index = sWalk;
+			image_speed = 1;
+		}
+	}

@@ -37,5 +37,8 @@ if (vx != 0) image_xscale = sign(vx);
 
 if place_meeting(x, y, oPlayer){
 	item_add(item);
+	
+	global.player.damage += 1;
+	
 	instance_destroy();
 }

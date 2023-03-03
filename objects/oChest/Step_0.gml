@@ -10,8 +10,8 @@ cy = camera_get_view_y(view_camera[0]);
 text_x = cx + xDifference;
 text_y = cy + yDifference;
 
-if (chest_bought and !payOnce){
-	instance_create_layer(x, y, "Items", objectSprite);
-	global.money -= chest_cost;
-	payOnce = true;
+if (chest_bought and payOnce) {
+	instance_create_layer(x, y, "Items", objectInstance);
+	global.money -= 2;
+	payOnce = false;
 }

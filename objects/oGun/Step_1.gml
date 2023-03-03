@@ -1,10 +1,15 @@
 /// @description 
 
 // check player direction to move gun respectively
-if oPlayer.look_direction var gun_direction = oPlayer.bbox_right; else var gun_direction = oPlayer.bbox_left;
+if (instance_exists(global.player)) {
+	if oPlayer.look_direction var gun_direction = oPlayer.bbox_right; else var gun_direction = oPlayer.bbox_left;
 
 x = gun_direction + 10;
 y = oPlayer.y + 10;
+
+}
+else
+	instance_destroy();
 
 image_angle = point_direction(x, y, mouse_x, mouse_y);
 

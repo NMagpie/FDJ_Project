@@ -13,7 +13,9 @@ y += (yTo - y) / 25;
 
 camera_set_view_pos(cam, x - view_w / 2, y - view_h / 2);
 
-layer_move_y = room_height - oPlayer.y;
+if (instance_exists(follow)) {
+layer_move_y = room_height - follow.y;
+}
 
 layer_x("SkyLayer", x);
 layer_y("SkyLayer", y - view_h / 2);
